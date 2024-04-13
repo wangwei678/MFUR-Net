@@ -2,15 +2,13 @@ import os
 import cv2
 import time
 import numpy as np
-
 import torch
 import torch.nn.functional as F
 
 from PIL import Image
 
 from options import opt
-from model.CIRNet_Res50 import CIRNet_R50
-from model.CIRNet_vgg16 import CIRNet_V16
+from model.MFURNet_Res50 import MFURNet_R50
 from dataLoader import test_dataset
 
 os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu_id
@@ -18,9 +16,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu_id
 # load the model
 print('load model...')
 if opt.backbone == 'R50':
-    model = CIRNet_R50()
-else:
-    model = CIRNet_V16()
+    model = MFURNet_R50()
 print('Use backbone ' + opt.backbone)
 gpu_num = torch.cuda.device_count()
 # load gpu
@@ -30,7 +26,7 @@ elif gpu_num > 1:
     print("Use multiple GPUs-", opt.gpu_id)
     model = torch.nn.DataParallel(model)
 
-model.load_state_dict(torch.load('./CIRNet_cpts/' + opt.test_model, map_location='cpu'))
+model.load_state_dict(torch.load('./MFUR-Net_cpts/' + opt.test_model, map_location='cpu'))
 
 
 model.cuda()
@@ -64,5 +60,3 @@ for dataset in test_datasets:
         cv2.imwrite(save_path + name, pre*255)
     print("Dataset:{} testing completed.".format(dataset))
 print("Test Done!")
-
-
