@@ -16,11 +16,11 @@ parser.add_argument('--gpu_id', type=str, default='7', help='gpu')
 parser.add_argument('--backbone', type=str, default='R50', help='backbone networks:R50')
 
 
-parser.add_argument('--rgb_root', type=str, default='../CIR-Net/data/RGBD_for_train/RGB/',
+parser.add_argument('--rgb_root', type=str, default='./data/RGBD_for_train/RGB/',
                     help='the training rgb images root')
-parser.add_argument('--depth_root', type=str, default='../CIR-Net/data/RGBD_for_train/depth/',
+parser.add_argument('--depth_root', type=str, default='./data/RGBD_for_train/depth/',
                     help='the training depth images root')
-parser.add_argument('--gt_root', type=str, default='../CIR-Net/data/RGBD_for_train/GT/',
+parser.add_argument('--gt_root', type=str, default='./data/RGBD_for_train/GT/',
                     help='the training gt images root')
 
 parser.add_argument('--save_path', type=str, default='./MFUR-Net_cpts/', help='the path to save models and logs')
